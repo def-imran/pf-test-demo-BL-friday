@@ -4,9 +4,6 @@ name: Gatling Performance Test
 'on':
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   performance_test:
     name: Run Gatling on GCP
