@@ -1,7 +1,7 @@
 
 name: Setup GCP Performance Testing
 
-'on':
+on:
   workflow_dispatch:
 
 jobs:
