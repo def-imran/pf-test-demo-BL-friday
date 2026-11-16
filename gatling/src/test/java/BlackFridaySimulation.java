@@ -11,7 +11,7 @@ public class BlackFridaySimulation extends Simulation {
     HttpProtocolBuilder httpProtocol = http
         .baseUrl(System.getProperty(
             "baseUrl",
-            "http://localhost:3000"
+            "https://httpbin.org"
         ));
 
     ScenarioBuilder scenario = scenario("Shop Visitors")
