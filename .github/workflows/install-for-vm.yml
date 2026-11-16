@@ -1,0 +1,50 @@
+
+name: Setup GCP Performance Testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    name: Install Java and Maven on GCP
+    runs-on: self-hosted
+
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Check Maven
+        shell: bash
+        run: |
+          if command -v mvn >/dev/null 2>&1; then
+            echo "Maven is already installed."
+          else
+            echo "Installing Maven..."
+            sudo -n apt-get update
+            sudo -n apt-get install -y maven
+          fi
+
+      - name: Verify Java and Maven
+        shell: bash
+        run: |
+          echo "=== Java version ==="
+          java -version
+
+          echo "=== Maven version ==="
+          mvn -version
+
+          echo "=== VM information ==="
+          hostname
+          nproc
+          free -h
+
+      - name: Setup completed
+        run: echo "GCP runner is ready for Gatling!"
