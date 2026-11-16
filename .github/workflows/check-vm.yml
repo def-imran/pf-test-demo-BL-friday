@@ -1,0 +1,30 @@
+
+name: Test GCP Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-connection:
+    name: Check GCP VM
+    runs-on: self-hosted
+
+    steps:
+      - name: Check operating system
+        run: |
+          echo "GitHub Actions draait op de GCP VM!"
+          uname -a
+
+      - name: Check CPU
+        run: nproc
+
+      - name: Check RAM
+        run: free -h
+
+      - name: Check Java
+        run: |
+          if command -v java >/dev/null 2>&1; then
+            java -version
+          else
+            echo "Java is nog niet geïnstalleerd."
+          fi
