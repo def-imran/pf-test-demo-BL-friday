@@ -1,3 +1,4 @@
+
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
@@ -9,30 +10,30 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 public class BlackFridaySimulation extends Simulation {
 
     HttpProtocolBuilder httpProtocol = http
-        .baseUrl(System.getProperty(
-            "baseUrl",
-            "http://10.164.0.3:3000"
-        ));
+            .baseUrl(System.getProperty(
+                    "baseUrl",
+                    "http://10.164.0.3:3000"
+            ));
 
     ScenarioBuilder scenario = scenario("Shop Visitors")
-        .exec(http("Homepage")
-            .get("/")
-            .check(status().is(200)))
-        .pause(2)
-        .exec(http("Products")
-            .get("/products")
-            .check(status().is(200)))
-        .pause(3)
-        .exec(http("Product Details")
-            .get("/products/1")
-            .check(status().is(200)));
+            .exec(http("Homepage")
+                    .get("/")
+                    .check(status().is(200)))
+            .pause(2)
+            .exec(http("Products")
+                    .get("/products")
+                    .check(status().is(200)))
+            .pause(3)
+            .exec(http("Product Details")
+                    .get("/products/1")
+                    .check(status().is(200)));
 
     {
         setUp(
-            scenario.injectOpen(
-                rampUsers(20)
-                    .during(Duration.ofSeconds(30))
-            )
+                scenario.injectOpen(
+                        rampUsers(200)
+                                .during(Duration.ofSeconds(60))
+                )
         ).protocols(httpProtocol);
     }
 }
