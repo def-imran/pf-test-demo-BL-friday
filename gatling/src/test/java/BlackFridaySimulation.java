@@ -31,7 +31,7 @@ public class BlackFridaySimulation extends Simulation {
     {
         setUp(
                 scenario.injectOpen(
-                        rampUsers(200)
+                        rampUsers(10000)
                                 .during(Duration.ofSeconds(60))
                 )
         ).protocols(httpProtocol);
